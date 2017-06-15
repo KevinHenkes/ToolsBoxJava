@@ -5,13 +5,12 @@ import java.util.Stack;
 
 public class Heap {
     int n = 0;
-    Stack<Worker> heap = new Stack<Worker>();
-    HashMap<Worker, Integer> rank = new HashMap<Worker, Integer>();
+    Stack<Integer> heap = new Stack<Integer>();
+    HashMap<Integer, Integer> rank = new HashMap<Integer, Integer>();
     
-    public Heap(Worker[] foo) {
-	for (Worker x : foo) {
+    public Heap(int[] foo) {
+	for (int x : foo) {
 	    this.push(x);
-	    x.run();
 	}
     }
     
@@ -19,7 +18,7 @@ public class Heap {
    	return this.heap.size() - 1;
    }
     
-    public void push(Worker x) {
+    public void push(int x) {
 	if (!rank.containsKey(x)) {
 	    int i = this.heap.size();
 	    this.heap.push(x);
@@ -28,10 +27,10 @@ public class Heap {
 	}
     }
     
-    public Worker pop() {
-	Worker root = this.heap.get(1);
+    public int pop() {
+	int root = this.heap.get(1);
 	this.rank.remove(root);
-	Worker x = this.heap.pop();
+	int x = this.heap.pop();
 	
 	if (!this.heap.isEmpty()) {
 	    this.heap.set(1, x);
@@ -43,8 +42,8 @@ public class Heap {
     }
    
     public void up(int i) {
-	Worker x = this.heap.get(i);
-	while (i > 1 && x.id < this.heap.get((int)i / 2).id) {
+	int x = this.heap.get(i);
+	while (i > 1 && x < this.heap.get((int)i / 2)) {
 	    this.heap.set(i, this.heap.get((int) i / 2));
 	    this.rank.put(this.heap.get((int) i / 2), i);
 	    i = (int) i / 2;
@@ -55,17 +54,17 @@ public class Heap {
     }
     
     public void down(int i) {
-	Worker x = this.heap.get(i);
+	int x = this.heap.get(i);
 	n = heap.size();
 	while (true) {
 	    int left = 2 * i;
 	    int right = left + 1;
 	    if (right < n &&
-		    this.heap.get(right).id < x.id && this.heap.get(right).id < this.heap.get(left).id) {
+		    this.heap.get(right) < x && this.heap.get(right) < this.heap.get(left)) {
 		this.heap.set(i, this.heap.get(right));
 		this.rank.put(this.heap.get(right), i);
 		i = right;
-	    } else if (left < n && this.heap.get(left).id < x.id) {
+	    } else if (left < n && this.heap.get(left) < x) {
 		this.heap.set(i, this.heap.get(left));
 		this.rank.put(this.heap.get(left), i);
 		i = left;
@@ -77,12 +76,12 @@ public class Heap {
 	}
     }
     
-    public void update(Worker older, Worker newer) {
+    public void update(int older, int newer) {
 	int i = this.rank.get(older);
 	this.rank.remove(older);
 	this.heap.set(i, newer);
 	this.rank.put(newer, i);
-	if (older.id < newer.id) {
+	if (older < newer) {
 	    this.down(i);
 	} else {
 	    this.up(i);

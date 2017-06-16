@@ -3,8 +3,8 @@ package entities;
 import java.util.Stack;
 
 public class Queue {
-    public Stack<Object> inStack = new Stack<Object>();
-    public Stack<Object> outStack = new Stack<Object>();
+    private Stack<Object> inStack = new Stack<Object>();
+    private Stack<Object> outStack = new Stack<Object>();
 
     public Queue() {}
 
@@ -21,9 +21,9 @@ public class Queue {
 	    while (!this.inStack.isEmpty())
 		this.outStack.push(this.inStack.pop());
 
-	    this.inStack = new Stack<Object>();  	    
+	    this.inStack = new Stack<Object>(); 
 	}
 	
-	return this.outStack.pop();
+	return (!this.outStack.isEmpty()) ? this.outStack.pop() : false;
     }
 }

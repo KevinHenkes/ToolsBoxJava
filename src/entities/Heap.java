@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.Stack;
 
 public class Heap {
-    int n = 0;
-    Stack<Integer> heap = new Stack<Integer>();
-    HashMap<Integer, Integer> rank = new HashMap<Integer, Integer>();
+    private int n = 0;
+    private Stack<Integer> heap = new Stack<Integer>();
+    private HashMap<Integer, Integer> rank = new HashMap<Integer, Integer>();
     
     public Heap(int[] foo) {
 	for (int x : foo) {

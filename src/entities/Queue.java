@@ -24,6 +24,6 @@ public class Queue {
 	    this.inStack = new Stack<Object>(); 
 	}
 	
-	return (!this.outStack.isEmpty()) ? this.outStack.pop() : false;
+	return this.outStack.pop();
     }
 }

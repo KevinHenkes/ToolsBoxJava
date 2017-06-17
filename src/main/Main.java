@@ -1,16 +1,15 @@
 package main;
 
-import entities.Queue;
+import lib.Array;
 
 public class Main {
 
 	public static void main(String[] args) {
-	    Queue queue = new Queue();
-	    
-	    queue.push(5);
-	    
-	    queue.push(10);
-	    
-	    System.out.println(queue.pop());
+	    Integer[] array = {1,3,10,25,38,75,188,189};
+	    try {
+		System.out.println(Array.closest_values(array)[0] + " " + Array.closest_values(array)[1]);
+	    } catch(ArrayIndexOutOfBoundsException exception) {
+		System.out.println("Error");
+	    }
 	}
 }
